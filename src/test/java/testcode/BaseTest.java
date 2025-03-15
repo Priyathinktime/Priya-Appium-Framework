@@ -1,23 +1,33 @@
 package testcode;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.time.Duration;
+import java.util.Properties;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.time.Duration;
 
 public class BaseTest {
     protected static AndroidDriver driver;  // Make driver static
     private static AppiumDriverLocalService service;
-
+    protected static Properties properties;
+    
+  
     @BeforeClass
-    public static void setUp() throws MalformedURLException {
+    public static void setUp() throws IOException {
+    	
+    	properties = new Properties();
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/config.properties");
+        properties.load(fis);
+    	
         if (driver == null) {  // Ensure driver is initialized once
             // Start Appium Service
             service = new AppiumServiceBuilder()
@@ -32,7 +42,8 @@ public class BaseTest {
             UiAutomator2Options options = new UiAutomator2Options()
                     .setPlatformName("Android")
                     .setDeviceName("emulator-5554")
-                    .setApp("C:\\Users\\rithi\\Downloads\\commcare\\commcare\\src\\test\\java\\resources\\Android-MyDemoAppRN.1.3.0.build-244 (1).apk")
+                    .setApp("D:\\AppiumDemo2\\src\\test\\resources\\resources\\Android-MyDemoAppRN.1.3.0.build-244 (1).apk")
+                  
                     .setAutomationName("UiAutomator2");
 
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
