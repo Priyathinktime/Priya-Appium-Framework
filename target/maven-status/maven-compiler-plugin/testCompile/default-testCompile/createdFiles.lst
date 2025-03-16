@@ -1,4 +1,3 @@
-base\BaseTest.class
 stepdefs\MobileStepDefs.class
 runners\TestRunner.class
-base\Listeners.class
+testcode\BaseTest.class

@@ -30,19 +30,27 @@ public class BaseTest {
     	
         if (driver == null) {  // Ensure driver is initialized once
             // Start Appium Service
-            service = new AppiumServiceBuilder()
-                    .withAppiumJS(new File("C:\\Users\\rithi\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
-                    .withIPAddress("127.0.0.1")
-                    .usingPort(4723)
-                    .withTimeout(Duration.ofSeconds(10))
-                    .build();
-            service.start();
+//            service = new AppiumServiceBuilder()
+//                   .withAppiumJS(new File("C:\\Users\\rithi\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
+//            	      .usingAnyFreePort()
+//            		.withIPAddress("127.0.0.1")
+//                    .usingPort(4723)
+//                    .withTimeout(Duration.ofSeconds(10))
+//                    .build();
+//            service.start();
+        	service = new AppiumServiceBuilder()
+        	        .withIPAddress("127.0.0.1")
+        	        .usingAnyFreePort()
+        	        .withTimeout(Duration.ofSeconds(10))
+        	        .build();
+        	service.start();
+
 
             // Set Capabilities
             UiAutomator2Options options = new UiAutomator2Options()
                     .setPlatformName("Android")
                     .setDeviceName("emulator-5554")
-                    .setApp("D:\\AppiumDemo2\\src\\test\\resources\\resources\\Android-MyDemoAppRN.1.3.0.build-244 (1).apk")
+                    .setApp(System.getProperty("user.dir") + "/src/test/resources/resources/Android-MyDemoAppRN.1.3.0.build-244 (1).apk")
                   
                     .setAutomationName("UiAutomator2");
 
